@@ -75,10 +75,7 @@ export const notifyAboutComment = onRequest(async (request, response) => {
       }),
       headers: { ...session_variables, ...request.headers },
     });
-  // Explicitly define the type of the response
-  //const photoInfoResponse: { data: { Default_photos_by_pk: { photo_url: string, description: string } } } = await photoInfoQuery.json();
-
-  //const { photo_url, description } = photoInfoResponse.data.Default_photos_by_pk;
+ 
     const { data: { Default_photos_by_pk: { photo_url, description } } } = await photoInfoQuery.json();
 
     const testAccount = await createTestAccount(); 
@@ -116,8 +113,8 @@ export const notifyAboutComment = onRequest(async (request, response) => {
   } catch (error) {
     console.error("Error processing request:", error);
     response.status(500).send({
-      message: "failed",
-      //error: error.message, // Include the error message in the response
+      //message: "failed",
+      error: error.message, // Include the error message in the response
     });
   }
 
